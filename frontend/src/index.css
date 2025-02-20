@@ -1,0 +1,104 @@
+/* App.css */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", serif;
+  
+}
+
+html, body {
+  height: 100%;  /* Ensures the body takes up full height */
+  margin: 0;     /* Removes default margin */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.content {
+  min-height: 100%;  /* Ensure the content takes the full height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;  /* Allow vertical scrolling */
+  padding-bottom: 20px; /* Ensure there's padding at the bottom to avoid cutting off content */
+}
+
+.subcontainer {
+  width: 90%;
+  margin-top: 3%;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+  height: 40px; /* Increased height for better usability */
+  padding: 9px 10px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 5px 10px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 30%;
+  height: 40px; /* Increased height for better usability */
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.viewTask{
+  cursor: pointer;
+  
+}
+
+
+
+.view{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 9%;
+  gap:10px;
+  border: 2px solid #f8eb2e;
+  background-color: #f3f2e9;
+  padding: 3%;
+}
+
+.back{
+ background-color: rgb(240, 134, 84);
+ padding: 10px;
+ border-radius: 3px;
+cursor: pointer;
+}
+

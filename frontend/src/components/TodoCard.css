@@ -1,0 +1,40 @@
+
+/* note: this css is not used in TodoCards.jsx component */
+
+.todoCard {
+    border: 2px solid #000;
+    height: 80px;
+    width: 100%;
+    margin: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* Makes the todoCard a column flex container */
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    padding: 3px;
+    font-size: 20px;
+    color: red; /* Optional: Change text color */
+    cursor: pointer; /* Optional: Add a pointer cursor to indicate it's clickable */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .update{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto; /* Pushes the button to the bottom of the todoCard */
+    padding: 10px;
+    font-size: 50px;
+    color:black; /* Optional: Change text color */
+    cursor: pointer; /* Optional: Add a pointer cursor to indicate it's clickable */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
