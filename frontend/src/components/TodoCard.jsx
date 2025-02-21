@@ -11,7 +11,7 @@ import '../App.css'
 
 
 
-const todoCard = ({title, body, del, id, todoUpdate}) => {
+const TodoCard = ({title, body, del, id, todoUpdate}) => {
 
 
    const navigate= useNavigate()
