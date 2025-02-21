@@ -5,8 +5,13 @@ import { toast } from "react-toastify";
 import useTodos from './CustomHook/useTodos';
 import { useSelector } from 'react-redux';
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
+import '../App.css'
+import './TodoCard.css'
+import Spinner from './Spinner';
 
 const Todo = () => {
+
+  const [loading, setLoading] = useState(false);
   const [id, setId] = useState("");
   const { todos, fetchTodos } = useTodos(id);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -53,6 +58,7 @@ const Todo = () => {
   // Add or update a todo
   async function submitHandler(event) {
     event.preventDefault();
+    setLoading(true);
 
     if (formData.title === "" || formData.body === "") {
       toast.error("Title or body can't be empty");
@@ -88,6 +94,8 @@ const Todo = () => {
       setFormData({ title: "", body: "" }); // Clear form
     } catch (error) {
       console.error("Error saving todo:", error);
+    }finally{
+      setLoading(false);
     }
   }
 
@@ -111,7 +119,10 @@ const Todo = () => {
             onChange={changeHandler}
           />
           <br />
-          <button type="submit">{updatingTodoId ? "Update" : "Add"}</button>
+          <button type="submit">
+            {
+            loading ? <Spinner /> : updatingTodoId ? "Update" : "Add"}
+            </button>
         </form>
 
         <div className='todocard-box'>

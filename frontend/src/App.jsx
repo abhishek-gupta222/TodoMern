@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import { logIn } from './redux/store';
 import ViewTodo from './components/ViewTodo';
+import Spinner from './components/Spinner';
 
 function App() {
   const dispatch = useDispatch()
@@ -30,6 +31,7 @@ function App() {
     <div className='box'>
 
       <div className="container">
+      
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Navbar />}>

@@ -1,60 +1,58 @@
 import React, { useState } from 'react';
-import axios from "axios"
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { logIn } from '../redux/store';
 import { toast } from "react-toastify";
 import useTodos from './CustomHook/useTodos';
+import Spinner from './Spinner';
+
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-const login = () => {
-
+const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   let id = sessionStorage.getItem("id");
- 
+
   const { todos, fetchTodos } = useTodos(id);
 
   const [formData, setFormData] = useState({
     email: "",
-
     password: ""
   });
 
   function changeHandler(event) {
-    const { name, value } = event.target; // Destructure name and value
+    const { name, value } = event.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value // Update the specific field in the form data
+      [name]: value
     }));
   }
 
   async function submitHandler(event) {
     event.preventDefault();
-    await axios.post(`${backendUrl}/api/v1/login`, formData)
-      .then((res) => {
-        toast.success("Login Successfull")
-        console.log(res.data.message)
-        console.log("res send successfully")
-        console.log(res.data.others._id)
-        sessionStorage.setItem("id", res.data.others._id);
-        dispatch(logIn()); 
-        navigate("/todo")
-      //  window.location.reload();
-          fetchTodos();
-      })
+    setLoading(true);
 
-
-      .catch((err) => {  // Corrected the catch block here
-        console.error("Error: ", err.response.data.message);
-      });
-    //console.log("Finally printing the value of Form Data:");
-    // console.log(formData);
+    try {
+      const res = await axios.post(`${backendUrl}/api/v1/login`, formData);
+      toast.success("Login Successful");
+      console.log(res.data.message);
+      sessionStorage.setItem("id", res.data.others._id);
+      dispatch(logIn());
+      navigate("/todo");
+      fetchTodos();
+    } catch (err) {
+      console.error("Error: ", err.response?.data?.message || "Something went wrong");
+      toast.error("Login Failed");
+    } finally {
+      setLoading(false); // Always stop loading (hide spinner) even on error
+    }
 
     setFormData({
       email: "",
       password: ""
-    })
+    });
   }
 
   return (
@@ -64,29 +62,34 @@ const login = () => {
         <form onSubmit={submitHandler}>
           <input
             type="email"
-            placeholder="email"
+            placeholder="Email"
             name="email"
             id="email"
             value={formData.email}
-            onChange={changeHandler} // Handle title input changes
+            onChange={changeHandler}
+            required
           />
           <br />
 
           <input
             type="password"
-            placeholder="password"
+            placeholder="Password"
             name="password"
             id="password"
             value={formData.password}
-            onChange={changeHandler} // Handle title input changes
+            onChange={changeHandler}
+            required
           />
           <br />
 
-          <button type="submit">LogIn</button>
+
+          <button type="submit" disabled={loading}>
+            {loading ? <Spinner /> : "Log In"}
+          </button>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default login
+export default Login;

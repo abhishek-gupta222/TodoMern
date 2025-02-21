@@ -4,9 +4,11 @@ import axios from "axios"
 import {useNavigate} from "react-router-dom";
 import { toast } from "react-toastify";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
+import Spinner from './Spinner';
 
 const Signup = () => {
 
+  const [loading, setLoading] = useState(false);
   const navigate= useNavigate();
 
   function goToLogin(){
@@ -29,19 +31,39 @@ const Signup = () => {
     
       async function submitHandler (event) {
         event.preventDefault();
-        await axios.post(`${backendUrl}/api/v1/register`, formData)
-        .then((res)=>{
-          toast.success("Account Created!")
-          console.log(res)
-          console.log("res send successfully")
-          navigate("/login")
+        setLoading(true);
 
-        })
+
+      //   await axios.post(`${backendUrl}/api/v1/register`, formData)
+      //   .then((res)=>{
+      //     toast.success("Account Created!")
+      //     console.log(res)
+      //     console.log("res send successfully")
+      //     navigate("/login")
+
+      //   })
        
 
-        .catch((err) => {  // Corrected the catch block here
-          console.error("Error: ", err.response.data.message);
-      });
+      //   .catch((err) => {  // Corrected the catch block here
+      //     console.error("Error: ", err.response.data.message);
+      // });
+
+
+
+      try {
+        const res = await axios.post(`${backendUrl}/api/v1/register`, formData);
+        toast.success("Account Created!");
+        console.log(res);
+        console.log("res sent successfully");
+        navigate("/login");
+      } catch (err) {
+        console.error("Error: ", err.response?.data?.message || err.message);
+        toast.error(err.response?.data?.message || "Something went wrong!");
+      }finally {
+        setLoading(false); // Always stop loading (hide spinner) even on error
+      }
+
+      
 
      //   console.log("Finally printing the value of Form Data:");
       //  console.log(formData);
@@ -87,7 +109,9 @@ const Signup = () => {
           />
           <br />
           
-          <button type="submit">SignUp</button>
+          <button  type="submit" disabled={loading}>
+          {loading ? <Spinner /> : "Sign Up"}
+            </button>
         </form>
         <br></br>
         <h3>---OR---</h3>

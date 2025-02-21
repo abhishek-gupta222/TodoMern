@@ -26,9 +26,7 @@ const Navbar = () => {
         navigate("/login")
         
         toast.success("Logout successfull!")
-        setTimeout(() => {
-            window.location.reload();
-          }, 3000); // 2000ms = 2 seconds
+       
           
         
     }

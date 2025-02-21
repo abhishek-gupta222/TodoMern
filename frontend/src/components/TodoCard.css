@@ -19,7 +19,7 @@
     text-align: center;
     
     padding: 3px;
-    font-size: 20px;
+    font-size:25px;
     color: red; /* Optional: Change text color */
     cursor: pointer; /* Optional: Add a pointer cursor to indicate it's clickable */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -31,8 +31,8 @@
     justify-content: center;
     text-align: center;
     margin: auto; /* Pushes the button to the bottom of the todoCard */
-    padding: 10px;
-    font-size: 50px;
+    padding: 3px;
+    font-size: 25px;
     color:black; /* Optional: Change text color */
     cursor: pointer; /* Optional: Add a pointer cursor to indicate it's clickable */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);

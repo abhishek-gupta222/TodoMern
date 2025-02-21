@@ -6,6 +6,7 @@ import { GrDocumentUpdate } from "react-icons/gr";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import ViewTodo from './ViewTodo';
 import { useNavigate } from 'react-router-dom';
+import '../App.css'
 
 
 
@@ -30,10 +31,20 @@ const todoCard = ({title, body, del, id, todoUpdate}) => {
         </div>
         
         <div className='actions'>
-      <MdDelete className='delete' onClick={() => del(id)} />
-      <GrDocumentUpdate className='update' onClick={() => todoUpdate(title, body, id)} />
+          <div className="delete" onClick={() => del(id)}>
+           <span>Delete</span>
+          <MdDelete  />
+          </div>
+      
+     
+
+      <div className="update" onClick={() => todoUpdate(title, body, id)}>
+           <span>Update</span>
+           <GrDocumentUpdate  />
+          </div>
+
       <div className="viewTask" onClick={viewTodo}>
-        View
+        <span>View</span>
         <FaRegArrowAltCircleRight />
       </div>
 
@@ -43,4 +54,4 @@ const todoCard = ({title, body, del, id, todoUpdate}) => {
   )
 }
 
-export default todoCard
+export default TodoCard
